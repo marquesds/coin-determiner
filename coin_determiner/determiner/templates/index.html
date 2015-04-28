@@ -15,13 +15,15 @@
             <div class="centered">
                 <span id="label-coin-input">Type the coin's value:</span>
 
-                <form class="form-inline" action="">
+                <form id="my-form" class="form-inline" action="{% url 'determiner:index' %}" method="post">
+                    {% csrf_token %}
                     <div class="form-group">
-                        <input id="coin-input" type="number" class="form-control" min="1" max="250" autofocus>
+                        <input id="id_value" name="value" type="number" class="form-control" min="1" max="250"
+                               required autofocus>
                         <button class="btn btn-lg btn-primary">Send</button>
                         <div id="result">
                             <span>Result:</span>
-                            <span>(2)</span>
+                            <span>({{ result }})</span>
                         </div>
                     </div>
                 </form>
@@ -39,7 +41,7 @@
 <script src="{% static 'js/npm.js' %}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#coin-input").keydown(function (e) {
+        $("#id_value").keydown(function (e) {
             // Allow: backspace, delete, tab, escape, enter and .
             if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
                         // Allow: Ctrl+A
@@ -53,6 +55,12 @@
             if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
                 e.preventDefault();
             }
+        });
+
+        $('#result').hide();
+
+        $(document).on('submit','#my-form',function(){
+            $('#result').show();
         });
     });
 </script>

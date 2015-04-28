@@ -1,11 +1,15 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Coin(models.Model):
     """
     Write something here
     """
-    value = models.IntegerField('Value', max_length=250)
+    value = models.IntegerField('Value', default=1, validators=[
+        MaxValueValidator(250),
+        MinValueValidator(1)
+    ])
 
     def coinDeterminer(self, value, coin_list=None):
         """
@@ -20,7 +24,7 @@ class Coin(models.Model):
             coins = [1, 5, 7, 9, 11]
         else:
             coins = coin_list
-        # Write something here
+        # List'll begin with the highest value
         coins.sort()
         coins.reverse()
         coins_number = 0

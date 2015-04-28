@@ -43,11 +43,11 @@ code {
     font-size: 80%;
 }
 
-#coin-input {
+#id_value {
     height: 45px;
     text-align: right;
     width: 200px;
-    font-size: 30px;
+    font-size: 26px;
 }
 
 .control-label {
