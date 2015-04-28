@@ -1,1 +1,1 @@
-web: gunicorn mywallet.wsgi --log-file -
+web: gunicorn coin_determiner.wsgi --log-file -
