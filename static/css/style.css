@@ -1,0 +1,66 @@
+body {
+    background-color: #785447;
+    color: #FFFFFF;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #5C3F36;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+    padding: 60px 15px 0;
+}
+
+.container p {
+    margin: 20px 0;
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+code {
+    font-size: 80%;
+}
+
+#coin-input {
+    height: 45px;
+    text-align: right;
+    width: 200px;
+    font-size: 30px;
+}
+
+.control-label {
+    font-size: 40px !important;
+}
+
+#label-coin-input {
+    font-size: 36px;
+    text-align: center;
+}
+
+.centered {
+    margin: 0 auto;
+    margin-top: 150px;
+    text-align: center;
+}
