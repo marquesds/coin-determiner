@@ -7,35 +7,45 @@ class Coin(models.Model):
     """
     value = models.IntegerField('Value', max_length=250)
 
-    def coinDeterminer(self, num, coin_list=None):
+    def coinDeterminer(self, value, coin_list=None):
         """
         Write something here
         :param num:
         :param coin_list:
         :return:
         """
+        used_coins = []
+        # Write something here
         if not coin_list:
             coins = [1, 5, 7, 9, 11]
         else:
             coins = coin_list
+        # Write something here
         coins.sort()
         coins.reverse()
-        cNum = 0
-        if num in coins:
-            cNum += 1
+        coins_number = 0
+        # Write something here
+        if value in coins:
+            used_coins.append(value)
+            coins_number += 1
         else:
-            while num > 0:
-                for c in coins:
-                    if num % c == 0:
-                        num -= c
-                        cNum += 1
+            # Write something here
+            while value > 0:
+                for coin in coins:
+                    # Write something here
+                    if value % coin == 0:
+                        used_coins.append(coin)
+                        value -= coin
+                        coins_number += 1
                         break
-                    elif num > c:
-                        num -= c
-                        cNum += 1
+                    elif value > coin:
+                        # Write something here
+                        used_coins.append(coin)
+                        value -= coin
+                        coins_number += 1
                         break
 
-        return cNum
+        return coins_number
 
     def __str__(self):
         return self.value
