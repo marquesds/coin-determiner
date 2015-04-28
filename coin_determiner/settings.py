@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^g@9k!zh=c)%7v$-z0u^y(@zz0sa21)pahtxv7mg_b9)3(y=an'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -74,17 +74,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'coin_determiner.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -113,3 +102,14 @@ STATICFILES_DIRS = (
 )
 
 STATIC_ROOT = BASE_DIR + '/staticroot/'
+
+# Heroku Settings
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.config()
+}
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
