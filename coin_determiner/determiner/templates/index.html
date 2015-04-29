@@ -15,15 +15,15 @@
             <div class="centered">
                 <span id="label-coin-input">Type the coin's value:</span>
 
-                <form id="my-form" class="form-inline" action="{% url 'determiner:index' %}" method="post">
+                <form id="my-form" class="form-inline" action="" method="post">
                     {% csrf_token %}
                     <div class="form-group">
                         <input id="id_value" name="value" type="number" class="form-control" min="1" max="250"
                                required autofocus>
-                        <button class="btn btn-lg btn-primary">Send</button>
+                        <button id="btnSubmit" class="btn btn-lg btn-primary">Send</button>
                         <div id="result">
                             <span>Result:</span>
-                            <span>({{ result }})</span>
+                            <span id="span-result">{{ result }}</span>
                         </div>
                     </div>
                 </form>
@@ -38,8 +38,22 @@
 </footer>
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/npm.js' %}"></script>
+<script src="{% static 'js/jquery.cookie.js' %}"></script>
 <script type="text/javascript">
+    var csrftoken = $.cookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
     $(document).ready(function () {
         $("#id_value").keydown(function (e) {
             // Allow: backspace, delete, tab, escape, enter and .
@@ -57,10 +71,26 @@
             }
         });
 
-        $('#result').hide();
-
-        $(document).on('submit','#my-form',function(){
-            $('#result').show();
+        $("#my-form").submit(function (event) {
+            $.ajax({
+                url: "{% url 'determiner:index' %}",
+                type: "POST",
+                data: {
+                    value: $('#id_value').val(),
+                    csrfmiddlewaretoken: csrftoken
+                },
+                success: function (response) {
+                    var elements = $(response);
+                    var newData = $('#span-result', elements);
+                    $('#span-result').empty().html(newData);
+                    $('#result').fadeIn();
+                },
+                complete: function () {
+                },
+                error: function (xhr, textStatus, thrownError) {
+                }
+            });
+            return false; //<---- move it here
         });
     });
 </script>

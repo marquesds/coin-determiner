@@ -65,6 +65,9 @@ code {
     text-align: center;
 }
 
-.coin-result {
+#result {
+    margin-top: 15px;
     color: #F8D820;
+    display: none;
+    font-size: 32px;
 }
