@@ -13,13 +13,14 @@ class Coin(models.Model):
 
     def coinDeterminer(self, value, coin_list=None):
         """
-        Write something here
-        :param num:
-        :param coin_list:
-        :return:
+        With a given value, the function returns the
+        least number of coins
+        :param value: Input value to be processed
+        :param coin_list: Optional list of default coins
+        :return: A least number of coins
         """
         used_coins = []
-        # Write something here
+        # If coin_list not given, get the default values
         if not coin_list:
             coins = [1, 5, 7, 9, 11]
         else:
@@ -28,22 +29,24 @@ class Coin(models.Model):
         coins.sort()
         coins.reverse()
         coins_number = 0
-        # Write something here
+        # Returns 1 if value is equal to one of default coins
         if value in coins:
             used_coins.append(value)
             coins_number += 1
         else:
-            # Write something here
+            # While value not 0 run the code below
             while value > 0:
                 for coin in coins:
-                    # Write something here
+                    # If result of division is zero, subtract value from coin
+                    # and add +1 to coins_number
                     if value % coin == 0:
                         used_coins.append(coin)
                         value -= coin
                         coins_number += 1
                         break
+                    # If result of division is not zero, get the highest coin
+                    # and subtract value from it
                     elif value > coin:
-                        # Write something here
                         used_coins.append(coin)
                         value -= coin
                         coins_number += 1
