@@ -1,6 +1,6 @@
 # Python Coin Determiner
-# https://coin-determiner.herokuapp.com/
 The least is what matters ;)
+# Site: https://coin-determiner.herokuapp.com/
 
 # Installing Requirements
 ```sh
