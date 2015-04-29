@@ -4,7 +4,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Coin(models.Model):
     """
-    Write something here
+    Class that represents the coin
     """
     value = models.IntegerField('Value', default=1, validators=[
         MaxValueValidator(250),

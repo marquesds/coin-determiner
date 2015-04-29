@@ -116,5 +116,5 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 try:
     from coin_determiner.local_settings import *
-except FileNotFoundError as ex:
-    print(ex)
+except ImportError as ex:
+    pass
